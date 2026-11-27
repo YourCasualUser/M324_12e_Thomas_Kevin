@@ -18,3 +18,8 @@ Demo repository for module M324: a GitHub Actions workflow that turns
 ## Try it
 
 Edit this file, commit, and watch the **Actions** tab.
+
+## New features added
+
+- Feature 1
+- Feature 2
