@@ -1,0 +1,37 @@
+name: Build README.html
+
+# Trigger: only when README.md changes on main (or manually, as a demo backup)
+on:
+  push:
+    branches: [main]
+    paths:
+      - README.md
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # Least privilege: the job only needs to push one file to this repo
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        # actions/checkout v7.0.1, pinned to the full commit SHA
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+      - name: Install pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc
+
+      - name: Convert README.md to README.html
+        run: pandoc README.md --from gfm --to html5 --standalone --metadata pagetitle="README" --output README.html
+
+      - name: Commit and push README.html
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.html
+          # Only commit if the HTML actually changed, otherwise git commit would fail
+          git diff --staged --quiet || git commit -m "chore: update README.html"
+          git push
