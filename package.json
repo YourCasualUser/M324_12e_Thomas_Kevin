@@ -1,0 +1,15 @@
+{
+  "name": "m324-12e-readme-to-html",
+  "version": "1.0.0",
+  "description": "Converts README.md to README.html (exam solution, reused)",
+  "type": "module",
+  "scripts": {
+    "convert": "node convert.js"
+  },
+  "dependencies": {
+    "marked": "^18.1.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

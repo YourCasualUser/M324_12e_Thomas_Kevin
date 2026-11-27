@@ -19,13 +19,13 @@ jobs:
         # actions/checkout v7.0.1, pinned to the full commit SHA
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
 
-      - name: Install pandoc
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y pandoc
+      - name: Install dependencies
+        # npm ci installs exactly what package-lock.json says, no install scripts
+        run: npm ci --ignore-scripts
 
       - name: Convert README.md to README.html
-        run: pandoc README.md --from gfm --to html5 --standalone --metadata pagetitle="README" --output README.html
+        # Exam solution: convert.js uses the "marked" library
+        run: node convert.js README.md README.html
 
       - name: Commit and push README.html
         run: |

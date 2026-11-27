@@ -7,7 +7,7 @@ Demo repository for module M324: a GitHub Actions workflow that turns
 
 1. Someone edits and pushes `README.md`.
 2. The workflow `Build README.html` starts.
-3. [pandoc](https://pandoc.org/) converts the Markdown to HTML.
+3. `convert.js` (the exam solution, using the [marked](https://marked.js.org/) library) converts the Markdown to HTML.
 4. The bot commits the new `README.html` back to the repository.
 
 ## Features
